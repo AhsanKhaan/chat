@@ -82,11 +82,13 @@ $name = $_SESSION['name'];
 		var conn = new WebSocket('ws://localhost:8080');
 		conn.onopen = function(e) {
 		    $('#uStatus').html("<?php echo $name; ?> <span style='color:green;'>[active]</span>");
+			console.log("Connection Established");
 		};
 
 		conn.onmessage = function(e) {
 		    $('#chatingIn').append("<p><span id='user2'>"+e.data+"</span></p>");
 		  	$('#chating').animate({scrollTop:$('#chatingIn').height()}, 0);
+			  console.log("On Message ");  
 		};
 		$("#msgField").keypress(function(e) {	  
 		e.preventDefault;
