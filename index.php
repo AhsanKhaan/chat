@@ -73,34 +73,16 @@ $name = $_SESSION['name'];
 </head>
 <body>
 <a href="logout.php">logout</a>
+<button id="RunServer">Run Server</button>
+<button id="StopServer">Stop Server</button>
+
 	<div id="chatBox">
 		<div><p id="uStatus">Connecting...</p></div>
 		<div id="chating"><div id="chatingIn"></div></div>
 		<div><input type="text" name="msg" id="msgField" /></div>
 	</div>
-	<script type="text/javascript">
-		var conn = new WebSocket('ws://localhost:8080');
-		conn.onopen = function(e) {
-		    $('#uStatus').html("<?php echo $name; ?> <span style='color:green;'>[active]</span>");
-		};
-
-		conn.onmessage = function(e) {
-		    $('#chatingIn').append("<p><span id='user2'>"+e.data+"</span></p>");
-		  	$('#chating').animate({scrollTop:$('#chatingIn').height()}, 0);
-		};
-		$("#msgField").keypress(function(e) {	  
-		e.preventDefault;
-		var key = e.which;
-		var msgField = $("#msgField").val();
-		if(key == 13) 
-		  {
-		    $("#chatingIn").append("<p align='right'><span id='user'>"+msgField+"</span></p>");
-		    conn.send(msgField);
-		    $("#msgField").val("");
-		    $('#chating').animate({scrollTop:$('#chatingIn').height()}, 0); 
-			return false;
-		  }
-	});
+	<script src="app.js" type="text/javascript">
+	
 	</script>
 </body>
 </html>
